@@ -1,0 +1,32 @@
+begin;
+insert into auth.users(id,email,is_anonymous) values ('95000000-0000-0000-0000-000000000001','evaluator-scope@example.test',false);
+insert into public.platform_administrators(user_id) values ('95000000-0000-0000-0000-000000000001');
+insert into public.institutions(id,name,status) values ('95000000-0000-0000-0000-000000000002','Evaluator permission test','active');
+insert into public.institution_memberships(id,institution_id,user_id,status) values ('95000000-0000-0000-0000-000000000005','95000000-0000-0000-0000-000000000002','95000000-0000-0000-0000-000000000001','active');
+insert into public.projects(id,institution_id,name,year,semester) values ('95000000-0000-0000-0000-000000000003','95000000-0000-0000-0000-000000000002','Permission fixture',2026,2);
+insert into public.evaluation_events(id,institution_id,name,scheduled_at,status,criteria_snapshot) values ('95000000-0000-0000-0000-000000000004','95000000-0000-0000-0000-000000000002','Permission fixture',now(),'open','[{"id":"criterion","name":"Test","weight":1,"descriptors":["1","2","3","4","5"]}]');
+insert into public.event_projects values ('95000000-0000-0000-0000-000000000002','95000000-0000-0000-0000-000000000004','95000000-0000-0000-0000-000000000003');
+insert into public.event_evaluators values ('95000000-0000-0000-0000-000000000002','95000000-0000-0000-0000-000000000004','95000000-0000-0000-0000-000000000001');
+set local role authenticated;
+select set_config('request.jwt.claims','{"sub":"95000000-0000-0000-0000-000000000001","role":"authenticated"}',true);
+do $$ begin
+ if (public.workspace_read('95000000-0000-0000-0000-000000000002')->'capabilities'->>'evaluate')::boolean then raise exception 'Platform role inherited evaluator capability'; end if;
+ if not (public.workspace_read('95000000-0000-0000-0000-000000000002')->'capabilities'->>'manageMembers')::boolean then raise exception 'Platform management regressed'; end if;
+ begin
+  perform public.workspace_command('95000000-0000-0000-0000-000000000002','evaluation.submit','{"event_id":"95000000-0000-0000-0000-000000000004","project_id":"95000000-0000-0000-0000-000000000003","scores":{"criterion":4}}');
+  raise exception 'Designated platform admin without evaluator membership submitted a grade';
+ exception when insufficient_privilege then null; end;
+end $$;
+reset role;
+insert into public.membership_roles values ('95000000-0000-0000-0000-000000000005','evaluator');
+set local role authenticated;
+do $$ begin if not (public.workspace_read('95000000-0000-0000-0000-000000000002')->'capabilities'->>'evaluate')::boolean then raise exception 'Explicit evaluator membership denied'; end if; end $$;
+select public.workspace_command('95000000-0000-0000-0000-000000000002','evaluation.submit','{"event_id":"95000000-0000-0000-0000-000000000004","project_id":"95000000-0000-0000-0000-000000000003","scores":{"criterion":4}}');
+select public.workspace_command('95000000-0000-0000-0000-000000000002','evaluation.submit','{"event_id":"95000000-0000-0000-0000-000000000004","project_id":"95000000-0000-0000-0000-000000000003","scores":{"criterion":5}}');
+do $$ begin if (select count(*) from public.project_evaluations where evaluator_id='95000000-0000-0000-0000-000000000001') <> 1 or (select average from public.project_evaluations where evaluator_id='95000000-0000-0000-0000-000000000001') <> 5 then raise exception 'Evaluator revision regressed'; end if; end $$;
+reset role;
+update public.institution_memberships set status='suspended' where id='95000000-0000-0000-0000-000000000005';
+set local role authenticated;
+do $$ begin if (public.workspace_read('95000000-0000-0000-0000-000000000002')->'capabilities'->>'evaluate')::boolean then raise exception 'Suspended evaluator retained capability'; end if; end $$;
+rollback;
+select 'PASS: no implicit evaluation by platform admin, explicit membership required, revisions preserved, suspension respected' as result;

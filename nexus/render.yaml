@@ -1,0 +1,25 @@
+# Backend only. The frontend remains in Vercel.
+services:
+  - type: web
+    name: catapimba-api
+    runtime: node
+    plan: free
+    region: virginia
+    branch: main
+    autoDeployTrigger: off
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build:api
+    startCommand: pnpm run start:api
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: NODE_ENV
+        value: production
+      - key: CONCIERGE_ENABLED
+        value: "false"
+      - key: FRONTEND_ORIGINS
+        value: https://catapimba-mu.vercel.app
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false

@@ -1,0 +1,594 @@
+.podium-new-result {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px;
+}
+.podium-new-result > div {
+  flex: 1;
+  min-width: 0;
+}
+.podium-new-result p {
+  margin: 5px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.podium-entry {
+  display: grid;
+  gap: 22px;
+}
+.podium-invitation {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 30px;
+  background: #123b47;
+  color: #edf8f4;
+  border: 1px solid #41636b;
+  border-radius: 23px;
+}
+.podium-invitation > svg {
+  color: #e8c77d;
+}
+.podium-invitation h3 {
+  color: #edf8f4;
+  font-size: 1.45rem;
+  margin: 8px 0;
+}
+.podium-invitation p {
+  color: #c5dadc;
+  font-size: 0.9rem;
+  margin: 0;
+}
+.podium-invitation .eyebrow {
+  color: #a4e3d1;
+}
+.podium-invitation .workspace-actions {
+  margin-top: 22px;
+}
+.podium-invitation .btn-primary {
+  color: #123b47;
+  background: #bce9d8;
+}
+.podium-invitation .btn-ghost {
+  background: transparent;
+  border-color: #789ba1;
+  color: #edf8f4;
+}
+.podium-loading {
+  text-align: center;
+  padding: 32px;
+  color: var(--muted);
+}
+.ceremony-dialog {
+  width: min(1200px, calc(100vw - 28px));
+  max-width: none;
+  max-height: calc(100dvh - 28px);
+  overflow: auto;
+  padding: 0;
+  margin: auto;
+  border: 1px solid #40656c;
+  border-radius: 26px;
+  color: #f1f8f6;
+  background: #0a252f;
+  box-shadow: 0 24px 100px #0005;
+}
+.ceremony-dialog::backdrop {
+  background: #061821e8;
+  backdrop-filter: blur(8px);
+}
+.ceremony-dialog:fullscreen {
+  width: 100vw;
+  max-height: 100dvh;
+  height: 100dvh;
+  border-radius: 0;
+  border: 0;
+}
+.ceremony {
+  --award-ink: #f1f8f6;
+  --award-muted: #bbd2d6;
+  position: relative;
+  isolation: isolate;
+  min-height: 700px;
+  padding: 30px 36px 24px;
+  background: radial-gradient(
+    ellipse at 50% 43%,
+    #204e55 0%,
+    #102e39 43%,
+    #0a252f 82%
+  );
+  overflow: hidden;
+}
+.ceremony-header {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+.ceremony-header {
+  flex-wrap: wrap;
+}
+.ceremony-header > div:first-child {
+  flex: 1 1 230px;
+}
+.ceremony-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ceremony-header-actions .btn {
+  font-size: 0.75rem;
+}
+.ceremony-header > div {
+  min-width: 0;
+}
+.ceremony-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.67rem;
+  color: #b9e7d8;
+  letter-spacing: 0.18em;
+  font-weight: 650;
+}
+.ceremony-header h2 {
+  color: var(--award-ink);
+  font-size: 1.03rem;
+  font-weight: 500;
+  margin: 10px 0 0;
+  letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
+}
+.ceremony .btn-ghost {
+  background: #ffffff09;
+  border-color: #6b8c96;
+  color: var(--award-ink);
+}
+.ceremony .btn-ghost:hover:not(:disabled) {
+  background: #ffffff16;
+  border-color: #b0d6d2;
+}
+.ceremony .btn-primary {
+  background: #b9e9d4;
+  color: #103a35;
+}
+.ceremony .btn-primary:hover:not(:disabled) {
+  background: #d1f3e5;
+}
+.ceremony :is(button, a, input):focus-visible {
+  outline-color: #f3d78d;
+}
+.ceremony-progress {
+  height: 3px;
+  background: #87b4bd35;
+  margin: 24px 0 30px;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.ceremony-progress span {
+  display: block;
+  height: 100%;
+  background: #c9ae68;
+  transition: width 0.12s linear;
+}
+.ceremony-announcement {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  min-height: 135px;
+  padding: 0 20px;
+}
+.ceremony-eyebrow {
+  color: #b6dbc9;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  margin: 0 0 14px;
+  font-weight: 650;
+}
+.ceremony-announcement h3 {
+  font-size: clamp(1.7rem, 3.2vw, 2.65rem);
+  line-height: 1.12;
+  color: var(--award-ink);
+  margin: 0 auto 14px;
+  max-width: 730px;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+.ceremony-announcement p:last-child {
+  color: var(--award-muted);
+  font-size: 0.9rem;
+  margin: 0 auto;
+  max-width: 650px;
+}
+.ceremony-stage {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 3vw, 40px);
+  max-width: 830px;
+  min-height: 330px;
+  align-items: end;
+  margin: 36px auto 0;
+  padding: 0 16px;
+  position: relative;
+  border-bottom: 1px solid #9fc8c644;
+}
+.ceremony-halo {
+  position: absolute;
+  z-index: -1;
+  width: min(500px, 80%);
+  aspect-ratio: 1;
+  top: -110px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #b9dfc514;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 38px #b9dfc506,
+    0 0 0 78px #b9dfc504;
+  pointer-events: none;
+}
+.award-column {
+  position: relative;
+  min-width: 0;
+  text-align: center;
+}
+.award-names {
+  padding-bottom: 18px;
+}
+.award-trophy {
+  color: #f0d58d;
+  margin: 0 auto 12px;
+  filter: drop-shadow(0 3px 12px #dfbb4c33);
+}
+.award-caption {
+  display: block;
+  font-size: 0.58rem;
+  color: #cbded8;
+  letter-spacing: 0.13em;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.award-names ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.award-names strong {
+  color: var(--award-ink);
+  display: block;
+  font-weight: 650;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.award-names li > span {
+  display: block;
+  color: #e8d395;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.15rem;
+  margin-top: 6px;
+  font-weight: 600;
+}
+.award-names small {
+  font-size: 0.7rem;
+  color: var(--award-muted);
+  font-weight: 400;
+}
+.award-tie {
+  display: inline-block;
+  font-size: 0.68rem;
+  color: #bddfd3;
+  border: 1px solid #87b2a477;
+  border-radius: 99px;
+  padding: 4px 9px;
+  margin-top: 13px;
+}
+.award-mystery {
+  color: var(--award-muted);
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  padding-bottom: 22px;
+  min-height: 100px;
+  align-content: center;
+}
+.award-block {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  border-radius: 12px 12px 0 0;
+  background: linear-gradient(140deg, #a7c7d1, #658e9b);
+  border-top: 2px solid #c5e0e2;
+  box-shadow:
+    inset -12px 0 0 #163d4926,
+    inset 0 2px 0 #fff4,
+    0 12px 24px #0002;
+  overflow: hidden;
+}
+.award-rank-1 .award-block {
+  min-height: 190px;
+  background: linear-gradient(135deg, #eddc9f, #bc9554);
+  border-top-color: #f9eac0;
+}
+.award-rank-2 .award-block {
+  min-height: 135px;
+}
+.award-rank-3 .award-block {
+  min-height: 98px;
+  background: linear-gradient(135deg, #d7b898, #a57b61);
+  border-top-color: #f1d7c2;
+}
+.award-block > span {
+  font-size: 3.1rem;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: #203f47;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+.award-block small {
+  font-size: 1.3rem;
+  vertical-align: top;
+  margin-left: 3px;
+}
+.award-block i {
+  position: absolute;
+  width: 160%;
+  height: 20%;
+  background: #ffffff15;
+  transform: rotate(-30deg);
+  top: 5%;
+  left: -40%;
+}
+.award-hidden .award-block {
+  background: #41646d;
+  border-color: #6c9199;
+}
+.award-hidden .award-block span {
+  color: #afcbd1;
+}
+.ceremony-controls {
+  position: relative;
+  z-index: 3;
+  margin-top: 28px;
+  border-top: 1px solid #63899555;
+  padding-top: 18px;
+}
+.ceremony-sound-note {
+  color: var(--award-muted);
+  font-size: 0.8rem;
+  margin: 0 0 14px;
+  text-align: center;
+}
+.ceremony-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.ceremony-control-row .btn {
+  font-size: 0.75rem;
+  padding: 9px 12px;
+}
+.ceremony-volume {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--award-muted);
+  font-size: 0.75rem;
+  min-height: 44px;
+}
+.ceremony-volume input {
+  width: 100px;
+  accent-color: #bce9d6;
+  min-height: 44px;
+}
+.ceremony-personal-note {
+  font-size: 0.69rem;
+  color: var(--award-muted);
+  margin: 16px 0 0;
+  text-align: center;
+}
+.ceremony-error {
+  color: #ffe1c6;
+  border: 1px solid #ba9072;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.85rem;
+  background: #4b302899;
+  margin: 16px 0 0;
+}
+.ceremony-confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+.ceremony-confetti i {
+  position: absolute;
+  width: 7px;
+  height: 13px;
+  opacity: 0;
+  top: 0;
+  animation: ceremony-confetti-fall 4s ease-out both;
+}
+@keyframes ceremony-confetti-fall {
+  0% {
+    opacity: 0;
+    translate: 0 -30px;
+    rotate: 0deg;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    translate: 60px 750px;
+    rotate: 500deg;
+  }
+}
+.ceremony-calm {
+  --award-ink: var(--ink);
+  --award-muted: var(--muted);
+  background: var(--surface);
+}
+.ceremony-calm
+  :is(.ceremony-brand, .ceremony-eyebrow, .award-caption, .award-tie) {
+  color: var(--emerald);
+}
+.ceremony-calm .ceremony-halo {
+  display: none;
+}
+.ceremony-calm .btn-ghost {
+  color: var(--ink);
+  border-color: var(--border);
+  background: var(--surface-soft);
+}
+.ceremony-calm .award-names li > span {
+  color: var(--emerald);
+}
+.ceremony-calm .ceremony-error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+@media (max-width: 640px) {
+  .podium-new-result {
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 12px;
+  }
+  .podium-new-result > div {
+    flex-basis: 70%;
+  }
+  .podium-new-result .btn {
+    width: 100%;
+  }
+  .podium-invitation {
+    padding: 24px;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .podium-invitation > svg {
+    width: 25px;
+  }
+  .ceremony-dialog {
+    width: calc(100vw - 16px);
+    max-height: calc(100dvh - 16px);
+    border-radius: 19px;
+  }
+  .ceremony {
+    padding: 23px 16px 20px;
+    min-height: 0;
+  }
+  .ceremony-header h2 {
+    font-size: 0.9rem;
+  }
+  .ceremony-brand {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+  .ceremony-announcement {
+    padding: 0;
+    min-height: 148px;
+  }
+  .ceremony-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+  .ceremony-announcement h3 {
+    font-size: 1.65rem;
+  }
+  .ceremony-announcement p:last-child {
+    font-size: 0.85rem;
+  }
+  .ceremony-stage {
+    padding: 0;
+    gap: 9px;
+    min-height: 280px;
+    margin-top: 28px;
+  }
+  .award-names strong {
+    font-size: 0.88rem;
+  }
+  .award-names li > span {
+    font-size: 1rem;
+  }
+  .award-caption {
+    font-size: 0.55rem;
+    letter-spacing: 0.03em;
+  }
+  .award-rank-1 .award-block {
+    min-height: 135px;
+  }
+  .award-rank-2 .award-block {
+    min-height: 100px;
+  }
+  .award-rank-3 .award-block {
+    min-height: 76px;
+  }
+  .award-block > span {
+    font-size: 2.4rem;
+  }
+  .award-tie {
+    font-size: 0.63rem;
+    padding: 4px 5px;
+  }
+  .ceremony-control-row .btn {
+    flex-grow: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ceremony-confetti {
+    display: none;
+  }
+}
+
+
+/* Legendas visuais para pessoas surdas e com perda auditiva. */
+.ceremony-captions {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 auto 14px;
+  max-width: 760px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #000000a8;
+  border: 1px solid #ffffff26;
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+.ceremony-captions-tag {
+  flex-shrink: 0;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #a4e3d1;
+  padding-top: 3px;
+}
+.ceremony-captions p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #f4fbfa;
+}
+.ceremony-captions strong {
+  color: #d8fff2;
+}
